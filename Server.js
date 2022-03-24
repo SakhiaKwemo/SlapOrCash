@@ -10,14 +10,14 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection ({
-    host: "us-cdbr-east-04.cleardb.com",
-    user: "bbb706357a1af9",  
-    password: "88eee656", 
-    database: "heroku_f193e2a84b6c8af"
+    host: "us-cdbr-east-05.cleardb.net",
+    user: "be90673ac84d1a",  
+    password: "4f8cf1b5", 
+    database: "heroku_cee58f433c74d7b"
 });
 
 //mysql://bbb706357a1af9:88eee656@us-cdbr-east-04.cleardb.com/heroku_f193e2a84b6c8af?reconnect=true
-//mysql://b8a87416e71132:39f4a642@us-cdbr-east-04.cleardb.com/heroku_dae24e7c3d6b223?reconnect=true
+//mysql://be90673ac84d1a:4f8cf1b5@us-cdbr-east-05.cleardb.net/heroku_cee58f433c74d7b?reconnect=true
 
 app.post("/create", (req, res) => {
     const roomkey = req.body.roomkey;
