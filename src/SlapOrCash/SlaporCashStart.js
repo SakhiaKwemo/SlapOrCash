@@ -24,7 +24,8 @@ class SlapOrCash extends Component {
       increment: 10, 
       room: null, 
       myVote: "", 
-      id: 1
+      id: 1, 
+      key: null
     };
   }
 
@@ -122,14 +123,20 @@ class SlapOrCash extends Component {
     });
   }
 
+  setKey = (e) => {
+    this.setState({
+      key: e,
+    });
+  }
+
   render () {
     return (
       <div>
         {this.state.home && <Home setHost = {this.setHost.bind(this)} setUser = {this.setUser.bind(this)}/>}
         {this.state.host && <MakeRoom setID = {this.setID.bind(this)} setHost2 = {this.setHost2.bind(this)}/>}
         {this.state.host2 && <MakeRoom2 id = {this.state.id} votes = {this.state.votes} setResultsM = {this.setResultsM.bind(this)}/>}
-        {this.state.user && <PlayerRoom myVote = {this.setMyVote.bind(this)}setRoom = {this.setRoom.bind(this)} setResultsP = {this.setResultsP.bind(this)} setRoomKey = {this.setRoomKey} />}
-        {this.state.resultsp && <ResultsP setHome = {this.setHome.bind(this)} setResultsP = {this.setResultsP.bind(this)} myVote = {this.state.myVote} room = {this.state.room}/>}
+        {this.state.user && <PlayerRoom setKey = {this.setKey.bind(this)} myVote = {this.setMyVote.bind(this)} setRoom = {this.setRoom.bind(this)} setResultsP = {this.setResultsP.bind(this)} setRoomKey = {this.setRoomKey} />}
+        {this.state.resultsp && <ResultsP key = {this.state.key} setHome = {this.setHome.bind(this)} setResultsP = {this.setResultsP.bind(this)} myVote = {this.state.myVote} room = {this.state.room}/>}
         {this.state.resultsm && <ResultsM setHome = {this.setHome.bind(this)}/>}
       </div>
     );

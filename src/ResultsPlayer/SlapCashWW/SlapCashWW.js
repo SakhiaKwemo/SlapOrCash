@@ -47,7 +47,7 @@ class SlapCashWW extends Component {
     return (
       <div>
         {this.state.home && <Home setHome = {this.props.setHome} setResults = {this.props.setResults} setSlap = {this.setSlap.bind(this)} setCash = {this.setCash.bind(this)}/>}
-        {this.state.results && <Results setHome = {this.props.setHome} cash = {this.state.cash} slap = {this.state.slap} setResults = {this.props.setResults}/>}
+        {this.state.results && <Results key = {this.props.key} room = {this.props.room} setHome = {this.props.setHome} cash = {this.state.cash} slap = {this.state.slap} setResults = {this.props.setResults}/>}
       </div>
     );
   }

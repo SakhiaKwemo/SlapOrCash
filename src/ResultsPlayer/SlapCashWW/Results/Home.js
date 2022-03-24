@@ -14,7 +14,9 @@ class Results extends Component {
       cash: 0, 
       slap2: 0, 
       cash2: 0, 
-      seconds: 30
+      seconds: 30, 
+      color: "white", 
+      color2: "white"
     };
   }
 
@@ -47,6 +49,19 @@ class Results extends Component {
     });
   }
 
+  setColor = () => {
+    if(this.state.slap >= this.state.cash){
+      this.setState({
+        color: "gold" 
+      });
+    }
+    else {
+      this.setState({
+        color2: "green" 
+      });
+    }
+  }
+
   componentDidMount() {
     axios.get("http://localhost:3001/getVote1").then((response) => {
       for (var i = 0; i < response.data.length; i++){
@@ -75,21 +90,17 @@ class Results extends Component {
   setNext = () => {
     if(this.state.slap >= this.state.cash){
       if(this.props.slap){
-        console.log("slap win win")
         this.props.setSlapWW();
       }
       else if (this.props.cash) {
-        console.log("slap win lose")
-        this.props.setSlapWL();
+        this.props.setSlapWW();
       }
     }
     else if (this.state.slap < this.state.cash){
       if(this.props.slap){
-        console.log("cash win lose")
-        this.props.setCashWL(); 
+        this.props.setCashWW(); 
       }
       else if (this.props.cash) {
-        console.log("cash win win")
         this.props.setCashWW(); 
       }
     }
@@ -98,9 +109,22 @@ class Results extends Component {
   render () {
     return (
       <div>
-          <p>Here are the results between slap and cash</p>
-          <p>Slap: {this.state.slap2}</p>
-          <p>Cash: {this.state.cash2}</p>
+      <div className='ResultsMakerHome'>  
+        <img className = "MakeRoom2Picture" src="SlapOrCash.png"/>
+        <div className='MakeRoomTitle'>
+          <h1>Results</h1>
+        </div>
+        <div className='ResultsMakerVoteBox'>
+          <div className='ResultsMakerColumn'>
+            <img src="/Slap.png"/>
+            <p style={{color: this.state.color}}>{this.state.slap2}</p>
+          </div>
+          <div className='ResultsMakerColumn'>
+            <img src="/Cash.png"/>
+            <p style={{color: this.state.color2}}>{this.state.cash2}</p>
+          </div>
+        </div>
+      </div>
       </div>
     );
   }

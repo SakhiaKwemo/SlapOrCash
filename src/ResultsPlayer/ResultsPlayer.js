@@ -45,8 +45,8 @@ class Results extends Component {
   setHeartwl = () => {
     this.setState({
       home: false, 
-      heartww: false, 
-      heartwl: true, 
+      heartww: true, 
+      heartwl: false, 
       slapcashwl: false, 
       slapcashww: false,
     });
@@ -78,9 +78,9 @@ class Results extends Component {
         {this.state.home2 && <Home2 setHome = {this.setHome.bind(this)}/>}
         {this.state.home && <Home myVote = {this.props.myVote} room = {this.props.room} setSlapCashwl = {this.setSlapCashwl} setSlapCashww = {this.setSlapCashww} setHeartwl = {this.setHeartwl} setHeartww = {this.setHeartww}/>}
         {this.state.heartwl && <HeartWL setHome = {this.props.setHome}/>}
-        {this.state.heartww && <HeartWW setHome = {this.props.setHome}/>}
+        {this.state.heartww && <HeartWW key = {this.props.key} room = {this.props.room} setHome = {this.props.setHome}/>}
         {this.state.slapcashwl && < SlapCashWL setHome = {this.props.setHome}/>}
-        {this.state.slapcashww && <SlapCashWW setHome = {this.props.setHome} room = {this.props.room}setResultsP = {this.props.setResultsP}/>}
+        {this.state.slapcashww && <SlapCashWW key = {this.props.key} setHome = {this.props.setHome} room = {this.props.room}setResultsP = {this.props.setResultsP}/>}
       </div>
     );
   }

@@ -21,8 +21,12 @@ class Home extends Component {
 
   render () {
     return (
-      <div>
-          <p>We are simply waiting for all the resutls to come in</p>
+      <div className='ResultsMakerHome'>  
+        <img className = "MakeRoom2Picture" src="SlapOrCash.png"/>
+        <div className='MakeRoomTitle'>
+          <h1>Results</h1>
+        </div>
+        <p style={{color: "white"}}>We are waiting for all votes to come in</p>
       </div>
     );
   }

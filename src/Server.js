@@ -9,11 +9,14 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection ({
-    user: "root", 
-    host: "localhost", 
-    password: "password", 
-    database: "songs"
+    host: "us-cdbr-east-04.cleardb.com",
+    user: "b8a87416e71132",  
+    password: "39f4a642", 
+    database: "heroku_dae24e7c3d6b223"
 });
+
+//mysql://bbb706357a1af9:88eee656@us-cdbr-east-04.cleardb.com/heroku_f193e2a84b6c8af?reconnect=true
+//mysql://b8a87416e71132:39f4a642@us-cdbr-east-04.cleardb.com/heroku_dae24e7c3d6b223?reconnect=true
 
 app.post("/create", (req, res) => {
     const roomkey = req.body.roomkey;
@@ -46,7 +49,7 @@ app.post("/voteHeart", (req, res) => {
 
 app.post("/voteSC", (req, res) => {
     const room = req.body.room;
-    db.query("UPDATE roomkeytable SET vote1 = 'sc' WHERE (roomkey = ?)", 
+    db.query("UPDATE roomkeytable SET vote1 = 'slap' WHERE (roomkey = ?)", 
     [room], 
     (err, result) => {
         if (err) {
@@ -174,6 +177,30 @@ app.post("/Ready3", (req, res) => {
 
 app.post("/Ready4", (req, res) => {
     db.query("UPDATE roomkeytable SET ready = '4' WHERE (roomkey IS NOT NULL)", 
+    (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send("Values inserted");
+        }
+    })
+});
+
+app.post("/Ready5", (req, res) => {
+    db.query("UPDATE roomkeytable SET ready = '5' WHERE (roomkey IS NOT NULL)", 
+    (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send("Values inserted");
+        }
+    })
+});
+
+app.post("/Ready0", (req, res) => {
+    db.query("UPDATE roomkeytable SET ready = '0' WHERE (roomkey IS NOT NULL)", 
     (err, result) => {
         if (err) {
             console.log(err);

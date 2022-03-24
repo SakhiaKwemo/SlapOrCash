@@ -16,7 +16,7 @@ class HeartWinner extends Component {
 
   setHeart = (e) => {
     console.log(e)
-    if(e.vote1 == "heart"){
+    if(true){ //if(e.vote1 == "heart")
         this.state.heart.push(e.roomkey)
     }
   }
@@ -99,7 +99,7 @@ class HeartWinner extends Component {
         </div>
         <img style={{height: "200px", marginTop: "20px", marginBottom: "-20px"}} src="/Heart.png"/>
         <p style={{color: this.state.color, fontSize: "45px", fontFamily: "'Russo One', sans-serif"}}>{this.state.name}</p>
-        <button className="HeartWinnerButton" onClick={this.Empty}>Exit Game</button>
+        <button style = {{color: "red", borderColor: "red"}} className="HeartWinnerButton" onClick={this.Empty}>Exit Game</button>
       </div>
     );
   }

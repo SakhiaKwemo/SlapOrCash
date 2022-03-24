@@ -11,7 +11,9 @@ class Home extends Component {
       sc: 0, 
       heart2: 0, 
       sc2: 0, 
-      seconds: 30
+      seconds: 30, 
+      color: "white", 
+      color2: "white"
     };
   }
 
@@ -24,7 +26,7 @@ class Home extends Component {
         heart: this.state.heart + 1 
       });
     }
-    if(this.state.vote.vote1 == "sc"){
+    if(this.state.vote.vote1 == "slap"){
       this.setState({
         sc: this.state.sc + 1 
       });
@@ -44,6 +46,19 @@ class Home extends Component {
     });
   }
 
+  setColor = () => {
+    if(this.state.heart >= this.state.sc){
+      this.setState({
+        color: "red" 
+      });
+    }
+    else {
+      this.setState({
+        color2: "green" 
+      });
+    }
+  }
+
   componentDidMount() {
     axios.get("http://localhost:3001/getVote1").then((response) => {
       for (var i = 0; i < response.data.length; i++){
@@ -57,6 +72,7 @@ class Home extends Component {
           clearInterval(timeinterval);
           this.setHeart(this.state.heart);
           this.setSC(this.state.sc);
+          this.setColor();
         }
     },100);
     const time = setInterval(() => {
@@ -69,23 +85,25 @@ class Home extends Component {
   };
 
   setNext = () => {
+    console.log(this.props.myVote)
     if(this.state.heart >= this.state.sc){
       if(this.props.myVote == "heart"){
         this.props.setHeartww();
         console.log("heart win win")
       }
-      else if (this.props.myVote == "sc") {
-        this.props.setHeartwl();
+      else if (this.props.myVote == "slap") {
+        this.props.setHeartww();
         console.log("heart win lose")
+        console.log("its going through if")
       }
     }
     else if (this.state.heart < this.state.sc){
-      if(this.props.myVote == "sc"){
+      if(this.props.myVote == "slap"){
         this.props.setSlapCashww();
         console.log("sc win win")
       }
       else if (this.props.myVote == "heart") {
-        this.props.setSlapCashwl();
+        this.props.setSlapCashww();
         console.log("sc win lose")
         console.log(this.props.myVote)
       }
@@ -93,11 +111,23 @@ class Home extends Component {
   }
 
   render () {
+    console.log("its going through home")
     return (
-      <div>
-        <h1>This is where the results maker animation will show up</h1>
-        <p>Heart Votes: {this.state.heart2}</p>
-        <p>Slap Cash Votes: {this.state.sc2}</p>
+      <div className='ResultsMakerHome'>  
+        <img className = "MakeRoom2Picture" src="SlapOrCash.png"/>
+        <div className='MakeRoomTitle'>
+          <h1>Results</h1>
+        </div>
+        <div className='ResultsMakerVoteBox'>
+          <div className='ResultsMakerColumn'>
+            <img src="/Heart.png"/>
+            <p style={{color: this.state.color}}>{this.state.heart2}</p>
+          </div>
+          <div className='ResultsMakerColumn'>
+            <img src="/SlapCash.png"/>
+            <p style={{color: this.state.color2}}>{this.state.sc2}</p>
+          </div>
+        </div>
       </div>
     );
   }

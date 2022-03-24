@@ -9,13 +9,28 @@ class CashWinner extends Component {
       cash: [], 
       name: "", 
       seconds: 30, 
-      length: 0, 
+      length: 0,
+      video: null,  
+      color: "white"
     };
   }
 
+  setVideo = (e) => {
+    if(this.props.room == "e") {
+      this.setState({
+        video: "crowdYay.mp4", 
+        color: "green"
+      });
+    }
+    else {
+      this.setState({
+        video: "Boo.mp4"
+      });
+    }
+   }
+
   setCash = (e) => {
-    console.log(e)
-    if(e.vote1 == "cash"){
+    if(true){ //if(e.vote1 == "cash")
         this.state.cash.push(e.roomkey)
     }
   }
@@ -32,6 +47,18 @@ class CashWinner extends Component {
     this.setState({
       name: e
     });
+
+    if(this.props.room == e) {
+      this.setState({
+        video: "crowdYay.mp4", 
+        color: "green"
+      });
+    }
+    else {
+      this.setState({
+        video: "Boo.mp4"
+      });
+    }
   }
 
   setLength = (e) => {
@@ -58,18 +85,31 @@ class CashWinner extends Component {
           console.log(response.data[0].winner)
           this.setName2(response.data[0].winner)
         }); 
+        //this.setVideo("e");
+        this.myVideo.play();
           clearInterval(timeinterval);
       }
     },100);
   };
 
   render () {
+    const video = (
+      <video className="playerVideo" src= {this.state.video}
+      ref={video => {
+          this.myVideo = video;
+      }}/> // Callback every ~250ms with currentTime
+    );
+
     return (
       <div>
-        <h1>A Winner is chosen for the cash</h1>
-        <a>Follow Me On Instagram @DJKwemo</a>
-        <button onClick={this.Empty}>Exit Game</button>
-        <p>The winner is: {this.state.name}</p>
+        {video}
+        <img className = "MakeRoom2Picture" src="SlapOrCash.png"/>
+        <div className='MakeRoomTitle'>
+          <h1>Cash Winner</h1>
+        </div>
+        <img style={{height: "200px", marginTop: "20px", marginBottom: "-20px"}} src="/Cash.png"/>
+        <p style={{color: this.state.color, fontSize: "45px", fontFamily: "'Russo One', sans-serif"}}>{this.state.name}</p>
+        <button style = {{width: "200px", height: "60px", color: "green", borderColor: "green"}} className="HeartWinnerButton" onClick={this.Empty}>Follow Me On Instagram</button>
       </div>
     );
   }

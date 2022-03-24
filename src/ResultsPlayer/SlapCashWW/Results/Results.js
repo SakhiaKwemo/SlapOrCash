@@ -15,8 +15,8 @@ class Results extends Component {
       home: false, 
       cashwl: false, 
       slapwl: false, 
-      cash: true, 
-      slap: true,
+      cash: false, 
+      slap: false,
       home2: true 
     };
   }
@@ -33,7 +33,7 @@ class Results extends Component {
     this.setState({
       home: false, 
       home2: false, 
-      cash: false, 
+      cash: true, 
     });
   };
 
@@ -47,7 +47,7 @@ class Results extends Component {
   setSlapWW = () => {
     this.setState({
       home: false, 
-      slap: false
+      slap: true
     });
   };
 
@@ -60,20 +60,16 @@ class Results extends Component {
 
 
   render () {
-    console.log(this.state.home)
-    console.log(this.state.cash)
-    console.log(this.state.slap)
     return (
       <div>
         {this.state.home2 && <Home2 setHome = {this.setHome.bind(this)}/>}
         {this.state.home && <Home setCashWW = {this.setCashWW.bind(this)} setCashWL = {this.setCashWL.bind(this)} setSlapWL = {this.setSlapWL.bind(this)} setSlapWW = {this.setSlapWW.bind(this)} cash = {this.props.cash} slap = {this.props.slap}/>}
-        {this.props.cash && !this.state.cash && <Cash setHome = {this.props.setHome}/>}
-        {this.props.slap && !this.state.slap && <Slap setHome = {this.props.setHome}/>}
-        {this.state.cashwl && <Cashwl setHome = {this.props.setHome}/>}
-        {this.state.slapwl && <Slapwl setHome = {this.props.setHome}/>}
+        {this.state.cash && <Cash key = {this.props.key} room = {this.props.room} setHome = {this.props.setHome}/>}
+        {this.state.slap && <Slap key = {this.props.key} room = {this.props.room} setHome = {this.props.setHome}/>}
       </div>
     );
   }
 }
 
 export default Results;
+//sjnj

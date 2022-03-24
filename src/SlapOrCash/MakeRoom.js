@@ -53,6 +53,7 @@ class MakeRoom extends Component {
   }
 
   setNext = () => {
+    axios.post("http://localhost:3001/Ready5").then(() => { console.log("success5")})
     this.props.setID(this.state.id);
     this.props.setHost2();
   }

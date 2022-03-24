@@ -10,14 +10,21 @@ class SlapWinner extends Component {
       name: "", 
       seconds: 20, 
       length: 0,
+      color: "white"
     };
   }
 
   setSlap = (e) => {
     console.log(e)
-    if(e.vote1 == "slap"){
+    if(true){ //if(e.vote1 == "slap")
         this.state.slap.push(e.roomkey)
     }
+  }
+
+  setColor = () => {
+    this.setState({
+      color: "gold",  
+    });
   }
 
   setName = () => {
@@ -49,19 +56,51 @@ class SlapWinner extends Component {
     const timeinterval = setInterval(() => {
       this.setName();
       if (this.state.seconds == 0) {
-          clearInterval(timeinterval);
+        this.myVideo.pause();
+        this.myVideo2.play();
+        this.myVideo3.play();
+        this.setColor();
+        clearInterval(timeinterval);
       }
     },100);
   };
 
   render () {
+
+    const video = (
+      <video autoPlay loop className="playerVideo" src={"drumroll.mp4"}
+      ref={video => {
+          this.myVideo = video;
+      }}/> // Callback every ~250ms with currentTime
+    );
+
+    const video2 = (
+      <audio className="playerVideo" src={"Cymbal Crash 005.wav"}
+      ref={video => {
+          this.myVideo2 = video;
+      }}/> // Callback every ~250ms with currentTime
+    );
+
+    const video3 = (
+      <video className="playerVideo" src={"crowdYay.mp4"}
+      ref={video => {
+          this.myVideo3 = video;
+      }}/> // Callback every ~250ms with currentTime
+    );
+
     axios.post("http://localhost:3001/winner", {winner: this.state.name}).then(() => { console.log("success2")}) 
     return (
       <div>
-        <h1>Choose the slap winner</h1>
-        <a>Follow Me On Instagram @DJKwemo</a>
-        <button onClick={this.Empty}>Exit Game</button>
-        <p>The winner is: {this.state.name}</p>
+        {video}
+        {video2}
+        {video3}
+        <img className = "MakeRoom2Picture" src="SlapOrCash.png"/>
+        <div className='MakeRoomTitle'>
+          <h1>Slap Winner</h1>
+        </div>
+        <img style={{height: "200px", marginTop: "20px", marginBottom: "-20px"}} src="/Slap.png"/>
+        <p style={{color: this.state.color, fontSize: "45px", fontFamily: "'Russo One', sans-serif"}}>{this.state.name}</p>
+        <button style = {{color: "gold", borderColor: "gold"}} className="HeartWinnerButton" onClick={this.Empty}>Exit Game</button>
       </div>
     );
   }

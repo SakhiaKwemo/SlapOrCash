@@ -10,12 +10,28 @@ class HeartWW extends Component {
       name: "", 
       seconds: 30, 
       length: 0, 
+      video: null, 
+      color: "white"
     };
   }
 
+  setVideo = () => {
+    if(this.state.name == this.props.room) {
+      this.setState({
+        video: "crowdYay.mp4", 
+        color: "red"
+      });
+    }
+    else if (this.state.name != this.props.room) {
+      this.setState({
+        video: "Boo.mp4"
+      });
+    }
+   }
+
   setHeart = (e) => {
     console.log(e)
-    if(e.vote1 == "heart"){
+    if(true){ //if(e.vote1 == "heart")
         this.state.heart.push(e.roomkey)
     }
   }
@@ -32,6 +48,17 @@ class HeartWW extends Component {
     this.setState({
       name: e
     });
+    if(this.props.room == e) {
+      this.setState({
+        video: "crowdYay.mp4", 
+        color: "red"
+      });
+    }
+    else {
+      this.setState({
+        video: "Boo.mp4"
+      });
+    }
   }
 
   setLength = (e) => {
@@ -58,18 +85,30 @@ class HeartWW extends Component {
           console.log(response.data[0].winner)
           this.setName2(response.data[0].winner)
         }); 
+          this.myVideo.play();
           clearInterval(timeinterval);
       }
     },100);
   };
 
   render () {
+    const video = (
+      <video className="playerVideo" src= {this.state.video}
+      ref={video => {
+          this.myVideo = video;
+      }}/> // Callback every ~250ms with currentTime
+    );
+  
     return (
       <div>
-        <h1>A winner for the heart is randomly chosen out of all the other names</h1>
-        <a>Follow Me On Instagram @DJKwemo</a>
-        <button onClick={this.Empty}>Exit Game</button>
-        <p>The winner is: {this.state.name}</p>
+        {video}
+        <img className = "MakeRoom2Picture" src="SlapOrCash.png"/>
+        <div className='MakeRoomTitle'>
+          <h1>Heart Winner</h1>
+        </div>
+        <img style={{height: "200px", marginTop: "20px", marginBottom: "-20px"}} src="/Heart.png"/>
+        <p style={{color: this.state.color, fontSize: "45px", fontFamily: "'Russo One', sans-serif"}}>{this.state.name}</p>
+        <a style = {{width: "200px", height: "60px", color: "red", borderColor: "red"}} className="HeartWinnerButton" href="https://www.instagram.com/djkwemo/">Follow Me</a>
       </div>
     );
   }

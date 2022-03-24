@@ -27,7 +27,7 @@ class PlayerRoom extends Component {
       
     return (
       <div>
-        {this.state.r1 && <Home setR2 = {this.setr2.bind(this)} setRoomKey = {this.props.sendRoomKey} setUser2 = {this.props.setUser2}/>}
+        {this.state.r1 && <Home setKey = {this.props.setKey} setR2 = {this.setr2.bind(this)} setRoomKey = {this.props.sendRoomKey} setUser2 = {this.props.setUser2}/>}
         {this.state.r2 && <PlayerRoom2 myVote = {this.props.myVote} room = {this.state.room} setResultsP = {this.props.setResultsP}/>}
       </div>
     );

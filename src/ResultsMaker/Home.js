@@ -26,7 +26,7 @@ class Home extends Component {
         heart: this.state.heart + 1 
       });
     }
-    if(this.state.vote.vote1 == "sc"){
+    if(this.state.vote.vote1 == "slap"){
       this.setState({
         sc: this.state.sc + 1 
       });

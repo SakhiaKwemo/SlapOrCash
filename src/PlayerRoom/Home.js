@@ -18,6 +18,7 @@ class Home extends Component {
   }
 
   sendRoomKey = () => {
+    this.props.setKey(this.state.roomkey);
     const key = this.state.roomkey; 
     axios.post("http://localhost:3001/create", {roomkey: key}).then(() => { console.log("success1")})   
     this.props.setR2(key); 
@@ -26,10 +27,14 @@ class Home extends Component {
   render () {      
     return (
         <div>
-        <p>Write Down your name</p>
-        <p>Try and use a unique name (i.e) First Name Last Name, make sure nobody takes the same name as you</p>
-        <input onChange={this.getRoomKey}/>
-        <button onClick={this.sendRoomKey}>Create Username</button>
+        <img className = "MakeRoom2Picture" src="SlapOrCash.png"/>
+        <div className='MakeRoomTitle'>
+          <h1>Username</h1>
+        </div>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "350px"}}>
+          <input style={{width: "300px", height: "30px", marginTop: "100px", backgroundColor: "black", color: "gold", fontSize: "17px", paddingLeft: "20px", borderColor: "gold", borderRadius: "20px", borderWidth: "3px", borderStyle: "solid"}} type = "text" onChange={this.getRoomKey} placeholder = "Create Username"/>
+          <button style={{width: "180px", marginTop: "100px"}} className="MakeRoom2VotingButton" onClick={this.sendRoomKey}>Enter Game</button>
+        </div>
         </div>
     );
   }
