@@ -4,15 +4,16 @@ const cors = require("cors");
 const app = express();
 
 const answer = [];
+const PORT = 3001
 
 app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection ({
     host: "us-cdbr-east-04.cleardb.com",
-    user: "b8a87416e71132",  
-    password: "39f4a642", 
-    database: "heroku_dae24e7c3d6b223"
+    user: "bbb706357a1af9",  
+    password: "88eee656", 
+    database: "heroku_f193e2a84b6c8af"
 });
 
 //mysql://bbb706357a1af9:88eee656@us-cdbr-east-04.cleardb.com/heroku_f193e2a84b6c8af?reconnect=true
@@ -306,6 +307,6 @@ app.get("/getSongs", (req, res) => {
     })
 }) 
 
-app.listen(3001, () => {
+app.listen(process.env.PORT || PORT, () => {
     console.log("hi")
 });  
